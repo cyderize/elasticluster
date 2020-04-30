@@ -549,9 +549,12 @@ class OpenStackCloudProvider(AbstractCloudProvider):
                     "Invalid `boot_disk_size` specified:"
                     " should be a positive integer, got {0} instead"
                     .format(kwargs['boot_disk_size']))
+            vc_args = {}
+            if 'boot_disk_availability_zone' in kwargs:
+                vc_args['availability_zone'] = kwargs.pop('boot_disk_availability_zone')
             volume = self.cinder_client.volumes.create(
                 size=bds, name=volume_name, imageRef=image_id,
-                volume_type=kwargs.pop('boot_disk_type'))
+                volume_type=kwargs.pop('boot_disk_type'), **vc_args)
 
             # wait for volume to come up
             waited = 0
