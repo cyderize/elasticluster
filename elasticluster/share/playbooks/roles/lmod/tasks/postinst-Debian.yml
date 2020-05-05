@@ -21,7 +21,7 @@
   lineinfile:
     path: '/etc/lmod/modulespath'
     line: '{{ modules_root }}'
-  when: 'is_ubuntu_18_04_or_later or is_debian_9_or_later'
+  when: '(lmod_installed_from_pkg_manager is not skipped) and (is_ubuntu_18_04_or_later or is_debian_9_or_later)'
 
 
 # CentOS7' `Lmod` package deploys a `/etc/profile.d/00-modulepath.sh`

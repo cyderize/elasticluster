@@ -23,6 +23,8 @@
     fi
     echo -n $LMOD_DIR
   register: _eb_lmod_dir
+  args:
+    executable: /bin/bash
 
 - name: Download bootstrap script
   get_url:

@@ -29,7 +29,7 @@
   package:
     name:
       - pkg-config
-      - tcl
+      - tcl-dev
     state: '{{ pkg_install_state }}'
   when: is_debian_compatible
 

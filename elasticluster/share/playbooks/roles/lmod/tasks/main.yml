@@ -23,23 +23,24 @@
     name: '{{ _lmod_pkg_name }}'
     state: '{{ pkg_install_state }}'
   ignore_errors: yes
-  register: _lmod_pkg_install_any
-  when: '(lmod_force_version is not defined) and not lmod_install_from_source|bool'
+  register: lmod_installed
+  when: '(lmod_force_version is undefined) and not lmod_install_from_source|bool'
 
 
-- name: Install Lmod from the OS repository
+- name: Install Lmod from the OS repository (forced version)
   package:
     name: '{{ _lmod_pkg_name }}{{__at__}}{{ lmod_force_version }}*'
     state: '{{ pkg_install_state }}'
   ignore_errors: yes
-  register: _lmod_pkg_install_force
+  register: lmod_installed_force_version
   when: '(lmod_force_version is defined) and not lmod_install_from_source|bool'
 
 
 - name: Record Lmod root directory path
   set_fact:
     lmod_root: /usr/share
-  when: '_lmod_pkg_install_any is success or _lmod_pkg_install_force is success'
+  register: lmod_installed_from_pkg_manager
+  when: '(lmod_installed is not skipped and lmod_installed is succeeded) or (lmod_installed_force_version is not skipped and lmod_installed_force_version is succeeded)'
 
 
 # ...if installing from OS packages failed, download and build sources
@@ -47,7 +48,7 @@
   import_tasks: build.yml
   vars:
     lmod_version: '{{ lmod_force_version|default(lmod_default_version) }}'
-  when: '_lmod_pkg_install_any is not success and _lmod_pkg_install_force is not success'
+  when: '(lmod_installed is failed) or (lmod_installed_force_version is failed)'
 
 
 # run post-install regardless of installation method
