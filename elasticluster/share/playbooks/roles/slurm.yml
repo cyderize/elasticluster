@@ -24,7 +24,8 @@
       NIS_MASTER: "{{groups.slurm_master[0]}}"
       when: 'multiuser_cluster|default("true")|bool'
     - role: 'lmod'
-      modules_root: '/opt/easybuild/modules/all'
+      vars:
+        modules_root: '/opt/easybuild/modules/all'
     - role: 'nfs-client'
       NFS_MOUNTS:
         - fs: '{{groups.slurm_master[0]}}:/home'

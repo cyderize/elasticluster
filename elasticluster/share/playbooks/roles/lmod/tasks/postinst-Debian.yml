@@ -36,7 +36,7 @@
   loop:
     - { dest: "/etc/profile.d/01-modulepath.sh",    src: "etc/profile.d/01-modulepath.sh.j2" }
     - { dest: "/etc/csh/login.d/01-modulepath.csh", src: "etc/profile.d/01-modulepath.csh.j2" }
-  when: 'is_ubuntu_16_04 or is_debian_8'
+  when: 'lmod_installed_from_pkg_manager is skipped or is_ubuntu_16_04 or is_debian_8'
 
 
 - name: Deploy shell profile snippets to load Lmod
