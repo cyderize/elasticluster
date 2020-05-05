@@ -1,6 +1,12 @@
 ---
+- name: Set SLURM common playbook params (Ubuntu 20.04)
+  set_fact:
+    slurm_pid_dir: /run
+  register: slurm_ubuntu_focal
+  when: is_ubuntu and ansible_distribution_version == '20.04'
 
 - name: Set SLURM common playbook params (Debian/Ubuntu)
   set_fact:
     slurm_pid_dir: /var/run/slurm-llnl
-  when: is_debian_compatible
+  when: is_debian_compatible and slurm_ubuntu_focal is skipped
+
