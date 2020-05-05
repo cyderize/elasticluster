@@ -4,10 +4,6 @@
 # Install EasyBuild
 #
 
-- name: Install OS-level dependecies
-  include_tasks: 'deps-{{ansible_os_family}}.yml'
-
-
 - name: Find out location of the `lmod` command
   shell: |
     set -e
