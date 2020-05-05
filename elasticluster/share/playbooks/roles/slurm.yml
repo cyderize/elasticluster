@@ -6,9 +6,13 @@
     - role: 'nis'
       NIS_MASTER: "{{groups.slurm_master[0]}}"
       when: 'multiuser_cluster|default("true")|bool'
+    - role: 'easybuild'
+      EASYBUILD_PREFIX: '/opt/easybuild'
     - role: 'nfs-server'
       NFS_EXPORTS:
         - path: '/home'
+          clients: "{{groups.slurm_worker + groups.slurm_submit|default([])}}"
+        - path: '{{EASYBUILD_PREFIX}}'
           clients: "{{groups.slurm_worker + groups.slurm_submit|default([])}}"
     - slurm-master
 
@@ -19,10 +23,14 @@
     - role: 'nis'
       NIS_MASTER: "{{groups.slurm_master[0]}}"
       when: 'multiuser_cluster|default("true")|bool'
+    - role: 'lmod'
+      modules_root: '/opt/easybuild/modules/all'
     - role: 'nfs-client'
       NFS_MOUNTS:
         - fs: '{{groups.slurm_master[0]}}:/home'
           mountpoint: '/home'
+        - fs: '{{groups.slurm_master[0]}}:/opt/easybuild'
+          mountpoint: '/opt/easybuild'
     - slurm-worker
 
 
