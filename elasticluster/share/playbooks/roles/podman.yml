@@ -1,0 +1,8 @@
+---
+- name: Podman Playbook
+  hosts: podman
+  tags:
+    - docker
+    - podman
+  roles:
+    - role: podman

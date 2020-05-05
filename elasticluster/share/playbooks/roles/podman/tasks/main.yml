@@ -1,0 +1,24 @@
+---
+
+- fail:
+    msg: Distro not supported by this playbook.
+  when: not is_ubuntu
+
+- name: Add kubic apt repo key
+  apt_key:
+    url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/{{podman_release_channel}}/xUbuntu_{{ansible_distribution_version}}/Release.key
+    state: present
+
+- name: Add kubic apt repo
+  apt_repository:
+    repo: deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/{{podman_release_channel}}/xUbuntu_{{ansible_distribution_version}}/ /
+    state: present
+    update_cache: 'yes'
+
+- name: Install podman
+  package:
+    name:
+      - podman
+      - slirp4netns
+      - fuse-overlayfs
+    state: '{{ pkg_install_state }}'

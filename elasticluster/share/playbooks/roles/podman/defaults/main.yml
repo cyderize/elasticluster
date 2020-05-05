@@ -1,0 +1,4 @@
+---
+
+# Release channel, either stable or devel
+podman_release_channel: 'stable'
