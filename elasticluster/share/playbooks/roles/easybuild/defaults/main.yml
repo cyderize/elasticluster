@@ -1,7 +1,7 @@
 ---
 
 # Lmod version >= 5.6.3 is needed by EasyBuild
-EASYBUILD_VERSION: '2.8.2'
+EASYBUILD_VERSION: '4.2.0'
 
 # Root directory for all EasyBuild files
 EASYBUILD_PREFIX: '/opt/easybuild'
@@ -13,4 +13,4 @@ EASYBUILD_INSTALL: []
 ### No customization should be necessary or useful below this line ###
 
 # where to get the bootstrap script from
-easybuild_bootstrap_url: 'https://raw.githubusercontent.com/hpcugent/easybuild-framework/develop/easybuild/scripts/bootstrap_eb.py'
+easybuild_bootstrap_url: 'https://raw.githubusercontent.com/easybuilders/easybuild-framework/develop/easybuild/scripts/bootstrap_eb.py'

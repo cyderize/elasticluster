@@ -66,10 +66,11 @@
     - "{{ EASYBUILD_PREFIX }}/modules/tools/EasyBuild/"
     - "{{ EASYBUILD_PREFIX }}/software/"
     - "{{ EASYBUILD_PREFIX }}/sources/"
+    - "{{ EASYBUILD_PREFIX }}/ebfiles/"
 
 
 - name: Run the bootstrap script
-  command: 'python {{ easybuild_build_dir }}/bootstrap_eb.py {{EASYBUILD_PREFIX}}'
+  command: 'python3 {{ easybuild_build_dir }}/bootstrap_eb.py {{EASYBUILD_PREFIX}}'
   args:
     chdir:   '{{ easybuild_build_dir }}'
     creates: '{{EASYBUILD_PREFIX}}/software/EasyBuild/{{EASYBUILD_VERSION}}/bin/'
