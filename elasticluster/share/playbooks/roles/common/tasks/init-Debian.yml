@@ -54,10 +54,10 @@
   apt:
     name:
       # Python 2
-      - python-pip
+      # - python-pip
       - python-pip-whl
       - python-setuptools
-      - python-virtualenv
+      # - python-virtualenv
       - virtualenv
       # Python 3
       - python3-pip
