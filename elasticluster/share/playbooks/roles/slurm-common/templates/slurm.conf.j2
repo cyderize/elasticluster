@@ -183,3 +183,11 @@ AuthType=auth/munge
 CryptoType=crypto/munge
 
 DisableRootJobs=NO
+
+{% if slurm_prolog is defined %}
+Prolog=/etc/slurm/prolog.sh
+{% endif %}
+
+{% if slurm_epilog is defined %}
+Epilog=/etc/slurm/epilog.sh
+{% endif %}

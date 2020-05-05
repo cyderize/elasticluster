@@ -154,6 +154,30 @@
     mode: 0444
 
 
+- name: Deploy SLURM prolog script
+  tags:
+    - slurm
+  template:
+    src: '{{ slurm_prolog }}'
+    dest: '/etc/slurm/prolog.sh'
+    owner: root
+    group: root
+    mode: 0544
+  when: 'slurm_prolog is defined'
+
+
+- name: Deploy SLURM epilog script
+  tags:
+    - slurm
+  template:
+    src: '{{ slurm_epilog }}'
+    dest: '/etc/slurm/epilog.sh'
+    owner: root
+    group: root
+    mode: 0544
+  when: 'slurm_epilog is defined'
+
+
 - name: Install support packages (Debian/Ubuntu)
   package:
     name:
