@@ -1,0 +1,5 @@
+---
+
+- name: Copy extra files
+  copy: '{{ item }}'
+  loop: '{{ copy_extra_files | from_yaml }}'

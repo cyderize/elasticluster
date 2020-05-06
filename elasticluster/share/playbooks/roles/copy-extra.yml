@@ -1,0 +1,8 @@
+---
+
+- name: Copy extra files
+  hosts: copy-extra
+  tags:
+    - copy
+  roles:
+    - role: copy-extra
