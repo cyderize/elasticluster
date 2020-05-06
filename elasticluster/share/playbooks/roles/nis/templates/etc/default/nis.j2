@@ -30,7 +30,7 @@ YPCHANGEOK=chsh
 NISMASTER='{% if is_nis_slave_server %}{{NIS_MASTER}}{% endif %}'
 
 # Additional options to be given to ypbind when it is started.
-YPBINDARGS='-p 833 -no-dbus'
+YPBINDARGS='-p 833'
 
 # Additional options to be given to ypserv when it is started.
 YPSERVARGS='-p 834'
