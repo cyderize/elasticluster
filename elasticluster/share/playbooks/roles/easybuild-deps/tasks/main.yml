@@ -1,8 +1,0 @@
----
-
-#
-# Install EasyBuild dependencies
-#
-
-- name: Install OS-level dependecies
-  include_tasks: 'deps-{{ansible_os_family}}.yml'

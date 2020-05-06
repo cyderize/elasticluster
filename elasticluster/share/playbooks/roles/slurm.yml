@@ -23,10 +23,8 @@
     - role: 'nis'
       NIS_MASTER: "{{groups.slurm_master[0]}}"
       when: 'multiuser_cluster|default("true")|bool'
-    - role: 'easybuild-deps'
-    - role: 'lmod'
-      vars:
-        modules_root: '/opt/easybuild/modules/all'
+    - role: 'easybuild-common'
+      EASYBUILD_PREFIX: '/opt/easybuild'
     - role: 'nfs-client'
       NFS_MOUNTS:
         - fs: '{{groups.slurm_master[0]}}:/home'
@@ -42,10 +40,8 @@
     - role: 'nis'
       NIS_MASTER: "{{groups.slurm_master[0]}}"
       when: 'multiuser_cluster|default("true")|bool'
-    - role: 'easybuild-deps'
-    - role: 'lmod'
-      vars:
-        modules_root: '/opt/easybuild/modules/all'
+    - role: 'easybuild-common'
+      EASYBUILD_PREFIX: '/opt/easybuild'
     - role: 'nfs-client'
       NFS_MOUNTS:
         - fs: '{{groups.slurm_master[0]}}:/home'

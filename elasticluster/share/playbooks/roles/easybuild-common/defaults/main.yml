@@ -1,0 +1,8 @@
+---
+
+# Lmod version >= 5.6.3 is needed by EasyBuild
+EASYBUILD_VERSION: '4.2.0'
+
+# Root directory for all EasyBuild files
+EASYBUILD_PREFIX: '/opt/easybuild'
+

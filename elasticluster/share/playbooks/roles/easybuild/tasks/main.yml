@@ -29,26 +29,6 @@
     validate_certs: '{{ not insecure_https_downloads|default("no")|bool }}'
 
 
-- name: Set EasyBuild user name
-  # there seems to be no other way to recover the "non-root" user
-  # when Ansible is running with `--become`
-  set_fact:
-    easybuild_user: '{{ansible_env.SUDO_USER}}'
-
-
-- name: Create `easybuild` group
-  group:
-    name: 'easybuild'
-    state: present
-
-
-- name: Populate `easybuild` group
-  user:
-    name: '{{easybuild_user}}'
-    groups: 'easybuild'
-    append: yes
-
-
 - name: Create required directories
   file:
     dest: '{{item}}'
@@ -77,25 +57,6 @@
     - EASYBUILD_PREFIX: '{{EASYBUILD_PREFIX}}'
     # ensure Lmod is available
     - PATH: '{{ _eb_lmod_dir.stdout|default("/usr/share/lmod/libexec") }}:{{ansible_env.PATH}}'
-
-
-# If this is installed, `eb -l` can colorize output
-- name: Install the `coloredlogs` Python package
-  pip:
-    name: coloredlogs
-  become: yes
-  become_user: root
-  ignore_errors: yes
-
-
-- name: Deploy configuration files
-  template:
-    src: '{{item}}.j2'
-    dest: '/{{item}}'
-    mode: 0444
-  loop:
-    - 'etc/easybuild.cfg'
-    - 'etc/profile.d/easybuild.sh'
 
 
 - name: Build initial set of software
