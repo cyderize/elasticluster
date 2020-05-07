@@ -3,7 +3,7 @@
 - name: Set SLURM worker playbook params (Debian/Ubuntu)
   set_fact:
     slurmd_packages:
-      - libpam-slurm
+      - "{{ (is_ubuntu and (ansible_distribution_major_version|int >= 20)) | ternary('libpam-slurm-adopt', 'libpam-slurm') }}"
       - slurmd
       - slurm-wlm-basic-plugins
   when: 'is_debian_8_or_later or is_ubuntu_15_10_or_later'
