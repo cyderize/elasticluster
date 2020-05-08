@@ -3,6 +3,8 @@
 # the next time `elasticluster setup` is run!
 #
 
+[basic]
+robot-paths = %(DEFAULT_ROBOT_PATHS)s:{{EASYBUILD_PREFIX}}/ebfiles
 
 [config]
 
@@ -16,9 +18,6 @@ installpath = {{EASYBUILD_PREFIX}}
 repositorypath = {{EASYBUILD_PREFIX}}/ebfiles
 sourcepath = {{EASYBUILD_PREFIX}}/sources
 
-# enable dependency resolution; search for `.eb` files here
-robot = %(repositorypath)s
-robot-paths = %(DEFAULT_ROBOT_PATHS)s
 
 # consider these dependencies already satisfied by the operating system
 # (this should include only very stable and CPU-independent SW)
@@ -40,11 +39,16 @@ robot-paths = %(DEFAULT_ROBOT_PATHS)s
 # xproto    7.0.28
 # zlib      1.2.8      1.2.8        1.2.8
 #
-filter-deps=bzip2,fontconfig,gzip,libreadline,libX11,libXext,libXft,libXinerama,libXt,M4,ncurses
+# filter-deps=bzip2,fontconfig,gzip,libreadline,libX11,libXext,libXft,libXinerama,libXt,M4,ncurses
 
 # build these, but hide module files to avoid cluttering `module avail`
 # with seldom-used software
-hide-deps=libjpeg-turbo,libpng,SQLite,xextproto,xproto
+# hide-deps=libjpeg-turbo,libpng,SQLite,xextproto,xproto
+
+job-backend=Slurm
+
+[job]
+cores={{EASYBUILD_JOB_CORES}}
 
 
 [override]
@@ -54,7 +58,7 @@ hide-deps=libjpeg-turbo,libpng,SQLite,xextproto,xproto
 minimal-toolchains = yes
 add-system-to-minimal-toolchains = yes
 
-# allow all users in the `easybuild` group to deploy SW
+# configure group permissions for deploying SW
 group-writable-installdir = {{ EASYBUILD_GROUP_WRITABLE_INSTALLDIR }}
 group = easybuild
 set-gid-bit = {{ EASYBUILD_SET_GID_BIT }}
