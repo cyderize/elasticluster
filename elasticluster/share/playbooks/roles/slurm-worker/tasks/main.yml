@@ -33,3 +33,29 @@
   service:
     name: '{{slurmd_service}}'
     enabled: yes
+
+- name: Create /etc/ssh_allowed
+  file:
+    path: /etc/ssh_allowed
+    state: touch
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure ansible user always has SSH access
+  lineinfile:
+    path: /etc/ssh_allowed
+    line: '{{ ansible_user }}'
+
+- name: Setup sshd pam.d configuration
+  lineinfile:
+    path: /etc/pam.d/sshd
+    regexp: '^account\s+\w\s+{{ item.so }}'
+    line: account {{ item.mode }} {{ item.so }} {{ item.options }}
+  loop:
+    - so: pam_listfile.so
+      mode: sufficient
+      options: item=user sense=allow onerr=fail file=/etc/ssh_allowed
+    - so: '{{ slurmd_pam_module_so }}'
+      mode: required
+      options: ''
