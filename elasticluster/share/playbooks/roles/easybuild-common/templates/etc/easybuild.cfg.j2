@@ -55,10 +55,10 @@ minimal-toolchains = yes
 add-system-to-minimal-toolchains = yes
 
 # allow all users in the `easybuild` group to deploy SW
-group-writable-installdir = yes
+group-writable-installdir = {{ EASYBUILD_GROUP_WRITABLE_INSTALLDIR }}
 group = easybuild
-set-gid-bit = yes
-umask = 002
+set-gid-bit = {{ EASYBUILD_SET_GID_BIT }}
+umask = {{ EASYBUILD_UMASK }}
 
 # force "generic" optimizations that will work on any CPU type
 # unless users configured otherwise in ElastiCluster

@@ -6,3 +6,7 @@ EASYBUILD_VERSION: '4.2.0'
 # Root directory for all EasyBuild files
 EASYBUILD_PREFIX: '/opt/easybuild'
 
+# By default, allow members of easybuild group to deploy software
+EASYBUILD_GROUP_WRITABLE_INSTALLDIR: 'yes'
+EASYBUILD_SET_GID_BIT: 'yes'
+EASYBUILD_UMASK: '002'
