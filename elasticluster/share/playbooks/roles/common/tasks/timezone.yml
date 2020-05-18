@@ -1,0 +1,9 @@
+---
+#
+# Ensure the node time zone is correct
+#
+
+- name: Set time zone
+  timezone:
+    name: '{{timezone}}'
+

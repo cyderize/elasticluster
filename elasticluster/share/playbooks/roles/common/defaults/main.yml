@@ -1,4 +1,6 @@
 ---
+# default time zone
+timezone: 'UTC'
 
 # whether to disable SELinux altogether (RHEL/CentOS only)
 disable_selinux: no
