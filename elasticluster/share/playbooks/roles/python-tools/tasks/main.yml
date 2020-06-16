@@ -1,0 +1,14 @@
+---
+- name: Install python3-venv
+  package:
+    name:
+      - python3-venv
+    state: present
+
+- name: Install Python packages
+  pip:
+    name: "{{ item }}"
+    executable: pip3
+  become: yes
+  become_user: root
+  loop: "{{ python_packages }}"

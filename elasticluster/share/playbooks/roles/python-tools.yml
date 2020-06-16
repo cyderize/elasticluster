@@ -1,0 +1,8 @@
+---
+
+- name: Install python tools
+  hosts: python-tools
+  tags:
+    - python
+  roles:
+    - role: python-tools

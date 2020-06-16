@@ -75,6 +75,7 @@
 - import_playbook: roles/samba.yml
 - import_playbook: roles/docker.yml
 - import_playbook: roles/podman.yml
+- import_playbook: roles/python-tools.yml
 
 # Jupyter installation comes last, to allow it to pick up any SW that's been
 # installed so far (e.g., for kernels, or for ipyparallel)
