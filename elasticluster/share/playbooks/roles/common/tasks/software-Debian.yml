@@ -44,4 +44,5 @@
       - libblas3
       - liblapack3
       - libtbb2
+      - libgfortran4
     state: '{{ pkg_install_state }}'
