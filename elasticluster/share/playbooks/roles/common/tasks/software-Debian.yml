@@ -39,4 +39,9 @@
       - screen
       - tmux
       - vim
+      # misc libraries
+      - libtbb2
+      - libblas3
+      - liblapack3
+      - libtbb2
     state: '{{ pkg_install_state }}'
